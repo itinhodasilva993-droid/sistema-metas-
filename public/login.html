@@ -1,0 +1,39 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Entrar · Águia Dourada</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060608">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="auth">
+  <section class="auth-hero">
+    <div data-eagle=""></div>
+    <h1 class="gold-text" data-site-name>Águia Dourada</h1>
+    <p>Foco, disciplina e meta batida. Envie seus perfis, acompanhe a avaliação e suba no ranking da semana.</p>
+  </section>
+  <section>
+    <div class="auth-card">
+      <div class="auth-mobile-eagle"><div data-eagle=""></div></div>
+      <h2 class="gold-text">Bem-vinda de volta</h2>
+      <p class="sub">Entre com o usuário e a senha que você recebeu.</p>
+      <div class="alert err" id="err"></div>
+      <form id="login-form" autocomplete="on">
+        <div class="field"><label for="username">Usuário</label><input class="input" id="username" name="username" autocomplete="username" autocapitalize="none" required></div>
+        <div class="field"><label for="password">Senha</label><input class="input" id="password" name="password" type="password" autocomplete="current-password" required></div>
+        <button class="btn btn-gold btn-block" id="btn">Entrar</button>
+      </form>
+      <p class="hint" style="text-align:center;margin-top:18px">Esqueceu a senha? Peça ao ADM para redefinir.</p>
+    </div>
+  </section>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

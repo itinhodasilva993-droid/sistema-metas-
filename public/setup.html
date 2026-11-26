@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Primeiro acesso · Águia Dourada</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060608">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="auth">
+  <section class="auth-hero">
+    <div data-eagle=""></div>
+    <h1 class="gold-text">Primeiro acesso</h1>
+    <p>Crie a conta do administrador. Só existe uma conta ADM, e ela é criada uma única vez.</p>
+  </section>
+  <section>
+    <div class="auth-card">
+      <div class="auth-mobile-eagle"><div data-eagle=""></div></div>
+      <h2 class="gold-text">Criar conta ADM</h2>
+      <p class="sub">Esta conta vai gerenciar as participantes, avaliar os perfis e definir as metas.</p>
+      <div class="alert err" id="err"></div>
+      <form id="setup-form">
+        <div class="field hide" id="token-field"><label for="token">Código de configuração</label><input class="input" id="token" name="token" autocomplete="off"><div class="hint">É o valor de SETUP_TOKEN configurado no servidor.</div></div>
+        <div class="field"><label for="name">Seu nome</label><input class="input" id="name" name="name" required maxlength="60"></div>
+        <div class="field"><label for="username">Usuário de acesso</label><input class="input" id="username" name="username" autocapitalize="none" required pattern="[a-zA-Z0-9._\-]{3,30}"><div class="hint">3 a 30 caracteres: letras, números, ponto ou traço.</div></div>
+        <div class="field"><label for="password">Senha</label><input class="input" id="password" name="password" type="password" minlength="6" autocomplete="new-password" required></div>
+        <div class="field"><label for="password2">Repita a senha</label><input class="input" id="password2" name="password2" type="password" minlength="6" autocomplete="new-password" required></div>
+        <button class="btn btn-gold btn-block" id="btn">Criar conta ADM</button>
+      </form>
+    </div>
+  </section>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/auth.js"></script>
+</body>
+</html>

@@ -1,0 +1,129 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Painel ADM · Águia Dourada</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060608">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div data-eagle="small"></div><div><div class="brand-name gold-text" data-site-name>Águia Dourada</div><div class="brand-tag">Painel ADM</div></div></div>
+  <div class="top-user">
+    <div class="who"><b id="me-name">—</b><span id="me-user"></span></div>
+    <div class="avatar" id="me-avatar">?</div>
+    <button class="btn btn-ghost btn-sm" id="btn-pw" title="Trocar senha">Senha</button>
+    <button class="btn btn-ghost btn-sm" id="btn-logout">Sair</button>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab" data-view="dashboard">Dashboard</button>
+  <button class="tab" data-view="avaliacao">Avaliação <span class="badge" id="badge-pending" data-n="0"></span></button>
+  <button class="tab" data-view="participantes">Participantes</button>
+  <button class="tab" data-view="ranking">Ranking</button>
+  <button class="tab" data-view="historico">Histórico</button>
+  <button class="tab" data-view="config">Metas e ajustes</button>
+</nav>
+<main>
+  <!-- DASHBOARD -->
+  <section class="view" id="view-dashboard">
+    <div class="page-head"><div><h1 class="gold-text">Visão geral</h1><p>Semana <span id="d-week">—</span></p></div>
+      <button class="btn btn-gold" data-go="avaliacao">Avaliar perfis</button></div>
+    <div class="grid g-4" id="d-stats"></div>
+    <div class="grid g-main mt">
+      <div class="card"><h3>Progresso da equipe <span class="dim" id="d-hit" style="text-transform:none;letter-spacing:0;font-size:13px"></span></h3><ul class="rank-list" id="d-team"></ul></div>
+      <div class="grid" style="align-content:start">
+        <div class="card"><h3>Últimos 7 dias <span class="legend"><span><i style="background:rgba(212,175,55,.25)"></i>Enviados</span><span><i style="background:#d4af37"></i>Aprovados</span></span></h3><div class="bars" id="d-days"></div></div>
+        <div class="card"><h3>Envios recentes</h3><div id="d-recent"></div></div>
+      </div>
+    </div>
+  </section>
+
+  <!-- AVALIAÇÃO -->
+  <section class="view" id="view-avaliacao">
+    <div class="page-head"><div><h1 class="gold-text">Avaliação de perfis</h1><p>Clique no perfil para abrir o Instagram, confira e aprove ou recuse.</p></div></div>
+    <div class="toolbar">
+      <input class="input" id="q-search" placeholder="Buscar @perfil ou nome...">
+      <select class="input" id="q-user" style="flex:0 1 220px"><option value="">Todas as participantes</option></select>
+      <label class="row" style="margin:0;gap:8px;color:var(--muted)"><input type="checkbox" class="checkbox" id="q-all"> Selecionar todos</label>
+      <button class="btn btn-ok btn-sm" id="q-bulk-ok" disabled>Aprovar selecionados</button>
+      <button class="btn btn-bad btn-sm" id="q-bulk-no" disabled>Recusar selecionados</button>
+    </div>
+    <div class="queue" id="q-list"></div>
+    <div class="pager" id="q-pager"></div>
+  </section>
+
+  <!-- PARTICIPANTES -->
+  <section class="view" id="view-participantes">
+    <div class="page-head"><div><h1 class="gold-text">Participantes</h1><p>Crie as contas e envie o link de acesso para cada uma.</p></div>
+      <button class="btn btn-gold" id="btn-new-user">+ Nova participante</button></div>
+    <div class="card"><div class="table-wrap"><table>
+      <thead><tr><th>Nome</th><th>Usuário</th><th>Semana</th><th>Pendentes</th><th>Total aprovado</th><th>Último acesso</th><th>Status</th><th></th></tr></thead>
+      <tbody id="u-list"></tbody></table></div></div>
+  </section>
+
+  <!-- RANKING -->
+  <section class="view" id="view-ranking">
+    <div class="page-head"><div><h1 class="gold-text">Ranking</h1><p>Semana <span id="r-week">—</span></p></div>
+      <div class="seg" id="r-seg"><button data-w="0" class="active">Esta semana</button><button data-w="1">Semana passada</button><button data-w="2">Há 2 semanas</button></div></div>
+    <div class="card glow"><div class="podium" id="r-podium"></div><ul class="rank-list" id="r-list"></ul></div>
+  </section>
+
+  <!-- HISTÓRICO -->
+  <section class="view" id="view-historico">
+    <div class="page-head"><div><h1 class="gold-text">Histórico de envios</h1><p>Todos os perfis enviados. Você pode mudar uma decisão a qualquer momento.</p></div></div>
+    <div class="toolbar">
+      <div class="seg" id="h-seg"><button data-s="" class="active">Todos</button><button data-s="pending">Em avaliação</button><button data-s="approved">Aprovados</button><button data-s="rejected">Recusados</button></div>
+      <input class="input" id="h-search" placeholder="Buscar @perfil ou nome...">
+      <select class="input" id="h-user" style="flex:0 1 220px"><option value="">Todas as participantes</option></select>
+    </div>
+    <div class="card"><div class="table-wrap"><table>
+      <thead><tr><th>Perfil</th><th>Participante</th><th>Enviado</th><th>Status</th><th>Observação</th><th></th></tr></thead>
+      <tbody id="h-list"></tbody></table></div><div class="pager" id="h-pager"></div></div>
+  </section>
+
+  <!-- CONFIG -->
+  <section class="view" id="view-config">
+    <div class="page-head"><div><h1 class="gold-text">Metas e ajustes</h1><p>Defina a meta semanal, as metas extras e o recado para a equipe.</p></div></div>
+    <div class="grid g-2">
+      <div class="card">
+        <h3>Meta principal</h3>
+        <form id="cfg-form">
+          <div class="field"><label>Perfis aprovados por semana</label><input class="input" type="number" min="1" max="10000" name="weekly_goal" required><div class="hint">Vale para todas, exceto quem tiver meta individual (em Participantes).</div></div>
+          <div class="field"><label>Nome do site</label><input class="input" name="site_name" maxlength="40"></div>
+          <div class="field"><label>Recado para as participantes</label><textarea class="input" name="message" maxlength="500" rows="4"></textarea></div>
+          <button class="btn btn-gold">Salvar</button>
+        </form>
+      </div>
+      <div class="card">
+        <h3>Metas extras (bônus)</h3>
+        <div id="tier-list"></div>
+        <form id="tier-form" class="mt">
+          <div class="row">
+            <div class="grow"><label>Nome</label><input class="input" name="name" placeholder="Ex.: Meta Diamante" required maxlength="40"></div>
+            <div style="flex:0 1 120px"><label>Aprovados</label><input class="input" name="target" type="number" min="1" required></div>
+          </div>
+          <div class="field mt"><label>Recompensa (opcional)</label><input class="input" name="reward" placeholder="Ex.: Bônus de R$ 50" maxlength="80"></div>
+          <button class="btn btn-ghost">+ Adicionar meta extra</button>
+        </form>
+      </div>
+    </div>
+    <div class="card mt">
+      <h3>Link de acesso</h3>
+      <p class="muted" style="margin-top:0">Envie este link para as participantes entrarem com o usuário e a senha que você criou:</p>
+      <div class="row"><div class="cred grow" id="access-link"></div><button class="btn btn-gold" id="copy-link">Copiar link</button></div>
+    </div>
+  </section>
+  <div class="footer">ÁGUIA DOURADA · SISTEMA DE METAS</div>
+</main>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/admin.js"></script>
+</body>
+</html>

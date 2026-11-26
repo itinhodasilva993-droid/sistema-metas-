@@ -1,0 +1,91 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<title>Minha meta · Águia Dourada</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#060608">
+<link rel="icon" href="/img/favicon.svg" type="image/svg+xml">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/css/style.css">
+</head>
+<body>
+<div class="app">
+<header class="topbar">
+  <div class="brand"><div data-eagle="small"></div><div><div class="brand-name gold-text" data-site-name>Águia Dourada</div><div class="brand-tag">Minha meta</div></div></div>
+  <div class="top-user">
+    <div class="who"><b id="me-name">—</b><span id="me-user"></span></div>
+    <div class="avatar" id="me-avatar">?</div>
+    <button class="btn btn-ghost btn-sm" id="btn-pw" title="Trocar senha">Senha</button>
+    <button class="btn btn-ghost btn-sm" id="btn-logout">Sair</button>
+  </div>
+</header>
+<nav class="tabs">
+  <button class="tab" data-view="inicio">Início</button>
+  <button class="tab" data-view="enviar">Enviar perfis</button>
+  <button class="tab" data-view="envios">Meus envios <span class="badge" id="badge-pending" data-n="0"></span></button>
+  <button class="tab" data-view="ranking">Ranking</button>
+</nav>
+<main>
+  <section class="view" id="view-inicio">
+    <div class="page-head"><div><h1>Olá, <span class="gold-text" id="hello-name">—</span></h1><p>Semana <span id="m-week">—</span></p></div>
+      <button class="btn btn-gold" data-go="enviar">+ Enviar perfis</button></div>
+    <div class="grid g-main">
+      <div class="card glow">
+        <h3>Meta da semana</h3>
+        <div class="ring-wrap"><div class="ring" id="m-ring"></div>
+          <div class="ring-info"><div class="big" id="m-big">—</div><p id="m-sub"></p><div class="chips" id="m-chips"></div></div></div>
+      </div>
+      <div class="card"><h3>Recado do ADM</h3><div class="message-box" id="m-message"></div>
+        <h3 class="mt">Metas extras</h3><div id="m-tiers"></div></div>
+    </div>
+    <div class="grid g-3 mt">
+      <div class="card"><h3>Seu ranking</h3><div class="stat"><div class="v gold-text" id="m-pos">—</div><div class="s" id="m-pos-sub"></div></div><ul class="rank-list mt" id="m-top"></ul></div>
+      <div class="card"><h3>Seus envios (7 dias)</h3><div class="bars" id="m-days"></div></div>
+      <div class="card"><h3>Semanas anteriores</h3><div id="m-history"></div></div>
+    </div>
+  </section>
+
+  <section class="view" id="view-enviar">
+    <div class="page-head"><div><h1 class="gold-text">Enviar perfis</h1><p>Cole o link do perfil do Instagram. Pode colar vários, um por linha.</p></div></div>
+    <div class="grid g-main">
+      <div class="card">
+        <form id="send-form">
+          <div class="field"><label for="links">Links dos perfis</label>
+            <textarea class="input" id="links" name="links" rows="8" placeholder="https://www.instagram.com/perfil/&#10;https://instagram.com/outroperfil&#10;@maisumperfil"></textarea>
+            <div class="hint" id="links-count">0 links</div></div>
+          <button class="btn btn-gold" id="send-btn">Enviar para avaliação</button>
+        </form>
+        <div class="results" id="send-results"></div>
+      </div>
+      <div class="card"><h3>Como funciona</h3>
+        <div class="tier hit"><div class="medal">1</div><div class="info"><b>Envie o link do perfil</b><span>Aceita link completo, link curto ou @usuario.</span></div></div>
+        <div class="tier hit"><div class="medal">2</div><div class="info"><b>O ADM avalia</b><span>Seu envio fica "Em avaliação" até ser conferido.</span></div></div>
+        <div class="tier hit"><div class="medal">3</div><div class="info"><b>Aprovado conta na meta</b><span>Cada perfil aprovado soma na meta da semana em que foi enviado.</span></div></div>
+        <div class="tier hit"><div class="medal">✦</div><div class="info"><b>Sem repetidos</b><span>Um perfil só pode ser enviado uma vez, por qualquer participante.</span></div></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="view" id="view-envios">
+    <div class="page-head"><div><h1 class="gold-text">Meus envios</h1><p>Acompanhe o status de cada perfil.</p></div>
+      <div class="seg" id="e-seg"><button data-s="" class="active">Todos</button><button data-s="pending">Em avaliação</button><button data-s="approved">Aprovados</button><button data-s="rejected">Recusados</button></div></div>
+    <div class="card"><div class="table-wrap"><table>
+      <thead><tr><th>Perfil</th><th>Enviado</th><th>Status</th><th>Observação</th></tr></thead>
+      <tbody id="e-list"></tbody></table></div><div class="pager" id="e-pager"></div></div>
+  </section>
+
+  <section class="view" id="view-ranking">
+    <div class="page-head"><div><h1 class="gold-text">Ranking</h1><p>Semana <span id="r-week">—</span></p></div>
+      <div class="seg" id="r-seg"><button data-w="0" class="active">Esta semana</button><button data-w="1">Semana passada</button></div></div>
+    <div class="card glow"><div class="podium" id="r-podium"></div><ul class="rank-list" id="r-list"></ul></div>
+  </section>
+  <div class="footer">ÁGUIA DOURADA · SISTEMA DE METAS</div>
+</main>
+</div>
+<script src="/js/common.js"></script>
+<script src="/js/painel.js"></script>
+</body>
+</html>
