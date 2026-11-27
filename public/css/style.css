@@ -392,3 +392,63 @@ td.actions .btn + .btn { margin-left: 6px; }
   .auth-card { margin-top: 18px; }
 }
 .sky-bird .real-eagle { width: 100%; height: auto; display: block; overflow: visible; filter: drop-shadow(0 0 12px rgba(255,150,40,.5)) drop-shadow(0 0 28px rgba(212,175,55,.3)); }
+
+/* ---------- Login: águia brava + animações (Motion) ---------- */
+.hero-eagle { width: min(330px, 70%); margin: 0 auto -18px; }
+.eagle-head { width: 100%; height: auto; display: block; overflow: visible; opacity: 0;
+  filter: drop-shadow(0 0 26px rgba(212,175,55,.35)) drop-shadow(0 10px 40px rgba(255,140,30,.18)); }
+.hero-title { perspective: 600px; }
+.hero-title [data-split] { display: inline-flex; animation: none !important; }
+.hero-title .ch { display: inline-block; opacity: 0; will-change: transform, opacity; }
+.auth-card { opacity: 0; }
+/* Sem Motion (ou movimento reduzido): mostra tudo direto */
+.motion-off .eagle-head, .motion-off .hero-title .ch, .motion-off .auth-card { opacity: 1 !important; }
+/* Rede de segurança caso algum script falhe */
+@keyframes showUp { to { opacity: 1; } }
+.eagle-head, .hero-title .ch, .auth-card { animation: showUp .01s 2.6s forwards; }
+.gold-flash { position: fixed; inset: 0; z-index: 300; pointer-events: none; opacity: 0;
+  background: radial-gradient(circle at 50% 45%, #fff3c4 0%, #d4af37 35%, #1a1406 75%, #060608 100%); }
+@media (max-width: 900px) {
+  .hero-eagle { width: 120px; margin-bottom: -6px; }
+  .auth-hero { padding-top: 96px; }
+}
+
+/* ---------- Mídia realista (public/img/aguia.* e fundo.*) ---------- */
+.real-eagle-wrap { opacity: 0; transform-style: preserve-3d; will-change: transform; }
+.real-eagle-media { display: block; width: 100%; height: auto; }
+video.real-eagle-media { -webkit-mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 60%, transparent 100%);
+          mask-image: radial-gradient(ellipse 50% 50% at 50% 50%, #000 60%, transparent 100%); }
+canvas.real-eagle-media, img.real-eagle-media { filter: drop-shadow(0 0 24px rgba(212,175,55,.3)); }
+.has-real-eagle .hero-eagle { width: min(460px, 86%); margin-bottom: -30px; }
+.has-real-eagle .sky-bird { display: none; }
+.real-bg { position: fixed; inset: 0; z-index: 0; pointer-events: none; opacity: 0; overflow: hidden; }
+.real-bg-media { width: 100%; height: 100%; object-fit: cover; display: block; }
+.real-bg::after { content: ''; position: absolute; inset: 0;
+  background: radial-gradient(ellipse at 30% 40%, rgba(6,6,8,.25), rgba(6,6,8,.85) 70%), linear-gradient(180deg, rgba(6,6,8,.3), rgba(6,6,8,.9)); }
+@media (max-width: 900px) { .has-real-eagle .hero-eagle { width: 220px; margin-bottom: -14px; } }
+
+/* ---------- Login v5: sem águia, nome grande, música ---------- */
+.sky-bird { display: none !important; }
+.hero-eagle { display: none; }
+.auth-hero .hero-title { font-size: clamp(84px, 11vw, 170px); line-height: .95; flex-direction: column; gap: 0; align-items: center; margin-top: 0; }
+.auth-hero .hero-title [data-split] { justify-content: center; }
+.auth-hero .hero-title [data-split]:last-child { font-size: 1.35em; letter-spacing: .12em; }
+.hero-title .ch { text-shadow: none; }
+.auth-hero p { margin-top: 22px; font-size: 16px; }
+@media (max-width: 900px) {
+  .auth-hero { padding-top: 64px; }
+  .auth-hero .hero-title { font-size: 64px; flex-direction: row; gap: .25em; }
+  .auth-hero .hero-title [data-split]:last-child { font-size: 1em; }
+}
+.music-btn { position: fixed; top: 16px; right: 16px; z-index: 50; width: 46px; height: 46px; border-radius: 50%;
+  display: grid; place-items: center; cursor: pointer; color: var(--gold, #d4af37);
+  background: rgba(10,10,12,.7); border: 1px solid rgba(212,175,55,.45); backdrop-filter: blur(6px);
+  box-shadow: 0 0 18px rgba(212,175,55,.18); transition: transform .2s, box-shadow .2s; position: fixed; }
+.music-btn:hover { transform: scale(1.08); box-shadow: 0 0 26px rgba(212,175,55,.35); }
+.music-btn svg { width: 22px; height: 22px; fill: currentColor; }
+.music-btn.off { color: #8a7a4a; border-color: rgba(212,175,55,.2); }
+.music-btn .eq { position: absolute; bottom: -18px; display: flex; gap: 2px; align-items: flex-end; height: 10px; }
+.music-btn .eq i { width: 3px; background: var(--gold, #d4af37); border-radius: 2px; animation: eq 1s ease-in-out infinite; }
+.music-btn .eq i:nth-child(2) { animation-delay: -.3s; } .music-btn .eq i:nth-child(3) { animation-delay: -.6s; }
+@keyframes eq { 0%,100% { height: 3px; } 50% { height: 10px; } }
+@media (prefers-reduced-motion: reduce) { .music-btn .eq i { animation: none; height: 6px; } }

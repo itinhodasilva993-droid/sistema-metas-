@@ -19,9 +19,11 @@
       btn.disabled = true; btn.textContent = 'Entrando...';
       try {
         const r = await api('/api/login', { method: 'POST', allow401: true, body: { username: login.elements.username.value, password: login.elements.password.value } });
+        if (window.onLoginSuccess) await window.onLoginSuccess();
         location.href = r.redirect;
       } catch (ex) {
         showErr(ex.message);
+        if (window.onLoginError) window.onLoginError();
         btn.disabled = false; btn.textContent = 'Entrar';
       }
     });
@@ -38,9 +40,11 @@
         const r = await api('/api/setup', { method: 'POST', allow401: true, body: {
           name: setup.elements.name.value, username: setup.elements.username.value, password: setup.elements.password.value, token: setup.elements.token.value,
         } });
+        if (window.onLoginSuccess) await window.onLoginSuccess();
         location.href = r.redirect;
       } catch (ex) {
         showErr(ex.message);
+        if (window.onLoginError) window.onLoginError();
         btn.disabled = false; btn.textContent = 'Criar conta ADM';
       }
     });
