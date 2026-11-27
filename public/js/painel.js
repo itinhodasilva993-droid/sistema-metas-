@@ -31,7 +31,7 @@
     $('#m-week').textContent = d.week.label;
     A.ring($('#m-ring'), d.approved, d.goal);
     const hit = d.approved >= d.goal;
-    $('#m-big').innerHTML = hit ? '<span class="gold-text">Meta batida! 🦅</span>' : `Faltam <span class="gold-text">${d.remaining}</span> perfis`;
+    $('#m-big').innerHTML = hit ? '<span class="gold-text">Meta batida! 🏆</span>' : `Faltam <span class="gold-text">${d.remaining}</span> perfis`;
     $('#m-sub').textContent = hit
       ? 'Parabéns! Continue enviando para conquistar as metas extras.'
       : `Sua meta é de ${d.goal} perfis aprovados até domingo.`;
@@ -49,13 +49,13 @@
     $('#m-top').innerHTML = '';
     A.renderRanking(null, $('#m-top'), d.ranking.slice(0, 3).concat(d.ranking.slice(3).filter((r) => r.me)));
     A.bars($('#m-days'), d.days, { total: 'count' });
-    $('#m-history').innerHTML = d.history.map((h) => `<div class="tier ${h.hit ? 'hit' : ''}" style="padding:8px 0"><div class="medal" style="width:34px;height:34px;font-size:15px">${h.hit ? '🦅' : '·'}</div>
+    $('#m-history').innerHTML = d.history.map((h) => `<div class="tier ${h.hit ? 'hit' : ''}" style="padding:8px 0"><div class="medal" style="width:34px;height:34px;font-size:15px">${h.hit ? '🏆' : '·'}</div>
       <div class="info"><b>${esc(h.label)}</b><span>${h.approved} aprovados</span></div></div>`).join('');
 
     // Comemoração: só uma vez por semana ao bater a meta
     try {
       const key = 'celebrated-' + d.week.start;
-      if (hit && !localStorage.getItem(key)) { localStorage.setItem(key, '1'); A.celebrate(); toast('Meta da semana batida! 🦅✨', 'ok'); }
+      if (hit && !localStorage.getItem(key)) { localStorage.setItem(key, '1'); A.celebrate(); toast('Meta da semana batida! 🏆✨', 'ok'); }
     } catch { /* sem storage */ }
   }
 

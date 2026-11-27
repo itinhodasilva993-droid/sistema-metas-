@@ -55,7 +55,7 @@
     $('#d-stats').innerHTML = [
       ['Aguardando avaliação', d.pendingTotal, 'perfis na fila', '⏳'],
       ['Aprovados na semana', t.approved, `de ${t.sent} enviados`, '✔'],
-      ['Meta batida', `${d.hitCount}/${d.members}`, `meta padrão: ${d.goal} perfis`, '🦅'],
+      ['Meta batida', `${d.hitCount}/${d.members}`, `meta padrão: ${d.goal} perfis`, '🏆'],
       ['Taxa de aprovação', rate + '%', `${t.rejected} recusados`, '★'],
     ].map(([k, v, s, i]) => `<div class="card stat"><div class="ico">${i}</div><div class="k">${k}</div><div class="v gold-text">${v}</div><div class="s">${s}</div></div>`).join('');
     $('#d-hit').textContent = `${d.hitCount} de ${d.members} bateram a meta`;
@@ -187,7 +187,7 @@
 
   const accessUrl = () => location.origin + '/login';
   const credText = (name, username, password) =>
-    `Olá, ${name}! 🦅\nSeu acesso ao painel de metas:\n\nLink: ${accessUrl()}\nUsuário: ${username}\nSenha: ${password}\n\nNo primeiro acesso você vai criar uma nova senha.`;
+    `Olá, ${name}! 🏆\nSeu acesso ao painel de metas:\n\nLink: ${accessUrl()}\nUsuário: ${username}\nSenha: ${password}\n\nNo primeiro acesso você vai criar uma nova senha.`;
 
   function showCreds(title, name, username, password) {
     const text = credText(name, username, password);

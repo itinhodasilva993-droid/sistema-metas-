@@ -432,7 +432,7 @@ app.put('/api/admin/settings', requireAdmin, async (req, res) => {
     if (!(g >= 1 && g <= 10000)) return bad(res, 'Meta semanal inválida.');
     await setSetting('weekly_goal', g);
   }
-  if (b.site_name !== undefined) await setSetting('site_name', String(b.site_name).trim().slice(0, 40) || 'Águia Dourada');
+  if (b.site_name !== undefined) await setSetting('site_name', String(b.site_name).trim().slice(0, 40) || 'Metas GR');
   if (b.message !== undefined) await setSetting('message', String(b.message).slice(0, 500));
   res.json({ ok: true, settings: (await getSettings()) });
 });

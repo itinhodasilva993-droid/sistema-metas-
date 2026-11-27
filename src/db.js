@@ -55,8 +55,8 @@ const SCHEMA = [
 
 const DEFAULT_SETTINGS = {
   weekly_goal: '140',
-  site_name: 'Águia Dourada',
-  message: 'Bem-vinda! Envie os perfis do Instagram e acompanhe sua meta da semana. Bora bater os 140! 🦅',
+  site_name: 'Metas GR',
+  message: 'Bem-vinda! Envie os perfis do Instagram e acompanhe sua meta da semana. Bora bater os 140! 🏆',
 };
 
 const norm = (v) => (typeof v === 'bigint' ? Number(v) : v);
@@ -132,6 +132,15 @@ function ready() {
         await D.run('INSERT INTO tiers (name, target, reward, created_at) VALUES (?, ?, ?, ?)', 'Meta Ouro', 200, 'Bônus ouro', now);
       }
       await D.run("INSERT OR IGNORE INTO settings (key, value) VALUES ('tiers_seeded', '1')");
+      // troca única do nome antigo (MK / Águia Dourada) por GR
+      const renamed = await D.get("SELECT value FROM settings WHERE key = 'gr_renamed'");
+      if (!renamed) {
+        const cur = await D.get("SELECT value FROM settings WHERE key = 'site_name'");
+        if (cur && /\bmk\b|águia dourada/i.test(cur.value)) {
+          await D.run("UPDATE settings SET value = 'Metas GR' WHERE key = 'site_name'");
+        }
+        await D.run("INSERT OR IGNORE INTO settings (key, value) VALUES ('gr_renamed', '1')");
+      }
     })();
     // não deixa o site travado para sempre se o banco não responder
     const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('O banco de dados não respondeu em 25 segundos (confira TURSO_DATABASE_URL e TURSO_AUTH_TOKEN).')), 25000).unref());
@@ -147,6 +156,7 @@ async function getSettings() {
   for (const r of rows) s[r.key] = r.value;
   s.weekly_goal = Math.max(1, parseInt(s.weekly_goal, 10) || 140);
   delete s.tiers_seeded;
+  delete s.gr_renamed;
   return s;
 }
 

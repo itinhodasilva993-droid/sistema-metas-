@@ -306,7 +306,7 @@
     const p = r.position <= 3 ? 'p' + r.position : '';
     return `<li class="rank-item ${r.me ? 'me' : ''}">
       <div class="rank-pos ${p}">${r.position}</div>
-      <div><div class="rank-name">${esc(r.name)} ${r.me ? '<small>(você)</small>' : ''} ${r.hit ? '<span title="Meta batida">🦅</span>' : ''}
+      <div><div class="rank-name">${esc(r.name)} ${r.me ? '<small>(você)</small>' : ''} ${r.hit ? '<span title="Meta batida">🏆</span>' : ''}
         ${details ? `<small>${r.pending || 0} pend. · ${r.rejected || 0} recus.</small>` : ''}</div>
         <div class="pbar ${r.hit ? 'done' : ''}"><i style="width:${r.percent}%"></i></div></div>
       <div class="rank-score">${r.approved}<small>de ${r.goal}</small></div></li>`;
