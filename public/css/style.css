@@ -361,3 +361,34 @@ td.actions .btn + .btn { margin-left: 6px; }
   .brand-tag, .top-user .avatar { display: none; }
   .brand .eagle { width: 42px; }
 }
+
+/* Logo GR */
+.logo-gr { height: 40px; width: auto; display: block; filter: drop-shadow(0 0 8px rgba(212,175,55,.35)); }
+.card-logo { display: block; width: 150px; height: auto; margin: 0 auto 18px; filter: drop-shadow(0 0 14px rgba(212,175,55,.35)); animation: logoGlow 4s ease-in-out infinite; }
+@keyframes logoGlow { 0%,100% { filter: drop-shadow(0 0 10px rgba(212,175,55,.25)); } 50% { filter: drop-shadow(0 0 22px rgba(212,175,55,.6)); } }
+@media (max-width: 640px) { .logo-gr { height: 32px; } }
+
+/* ---------- Login: céu com águia-fênix ---------- */
+.sky { position: fixed; inset: 0; z-index: 0; pointer-events: none; overflow: hidden; }
+.sky-fire { position: absolute; inset: 0; }
+.sky-bird { position: absolute; left: 0; top: 0; will-change: transform; }
+.sky-bird .eagle { width: 100%; height: auto; filter: drop-shadow(0 0 14px rgba(255,150,40,.55)) drop-shadow(0 0 30px rgba(212,175,55,.35)); }
+.sky-bird .eagle .wing { animation-duration: 1.15s; }
+.sky-bird .eagle .eagle-fly { animation: none; }
+.sky-bird .eagle .halo { opacity: .5; }
+.hero-title {
+  font-size: clamp(54px, 8vw, 110px); line-height: 1; letter-spacing: .06em; margin: 0;
+  display: flex; gap: .3em; justify-content: center; flex-wrap: wrap;
+  animation: floaty 5s ease-in-out infinite;
+  filter: drop-shadow(0 0 18px rgba(255,170,60,.35)) drop-shadow(0 6px 30px rgba(212,175,55,.35));
+}
+.hero-title span:nth-child(2) { animation: floaty 5s ease-in-out infinite reverse; display: inline-block; }
+@keyframes floaty { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-14px); } }
+@media (max-width: 900px) {
+  .auth { grid-template-columns: 1fr; align-content: center; }
+  .auth-hero { display: flex; padding: 140px 16px 0; }
+  .auth-hero p { display: none; }
+  .hero-title { font-size: 52px; }
+  .auth-card { margin-top: 18px; }
+}
+.sky-bird .real-eagle { width: 100%; height: auto; display: block; overflow: visible; filter: drop-shadow(0 0 12px rgba(255,150,40,.5)) drop-shadow(0 0 28px rgba(212,175,55,.3)); }
