@@ -133,6 +133,10 @@ function ready() {
       }
       await D.run("INSERT OR IGNORE INTO settings (key, value) VALUES ('tiers_seeded', '1')");
     })();
+    // não deixa o site travado para sempre se o banco não responder
+    const timeout = new Promise((_, rej) => setTimeout(() => rej(new Error('O banco de dados não respondeu em 25 segundos (confira TURSO_DATABASE_URL e TURSO_AUTH_TOKEN).')), 25000).unref());
+    readyPromise = Promise.race([readyPromise, timeout]);
+    readyPromise.catch(() => { readyPromise = null; }); // tenta de novo na próxima vez
   }
   return readyPromise;
 }

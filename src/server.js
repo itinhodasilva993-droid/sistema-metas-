@@ -15,7 +15,10 @@ const app = express();
 app.disable('x-powered-by');
 app.set('trust proxy', 1); // necessário atrás de proxy (Render, Railway, Nginx...)
 app.use(express.json({ limit: '200kb' }));
-app.use(async (req, res, next) => { await ready(); next(); });
+app.use(async (req, res, next) => {
+  try { await ready(); } catch (e) { console.error('Banco indisponível:', e.message); return res.status(503).send('Banco de dados indisponível. Tente de novo em instantes.'); }
+  next();
+});
 
 // Cabeçalhos de segurança
 app.use(async (req, res, next) => {
@@ -485,10 +488,12 @@ app.use((err, req, res, next) => {
 });
 
 if (require.main === module) {
+  app.listen(PORT, () => console.log(`\n  🦅  Sistema de Metas rodando na porta ${PORT} (banco: ${D.kind})`));
+  console.log('  Conectando ao banco de dados...');
   ready().then(async () => {
-    app.listen(PORT, () => console.log(`\n  🦅  Sistema de Metas rodando em http://localhost:${PORT} (banco: ${D.kind})\n`));
-    if (await needsSetup()) console.log(`  Primeiro acesso: abra http://localhost:${PORT}/setup para criar a conta ADM.\n`);
-  }).catch((e) => { console.error('Falha ao iniciar o banco de dados:', e); process.exit(1); });
+    console.log('  ✔ Banco de dados conectado.');
+    if (await needsSetup()) console.log(`  Primeiro acesso: abra /setup para criar a conta ADM.\n`);
+  }).catch((e) => { console.error('  ✖ Falha ao conectar no banco de dados:', e && e.message ? e.message : e); });
 }
 
 module.exports = app;
